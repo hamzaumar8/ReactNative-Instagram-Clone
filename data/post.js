@@ -8,7 +8,13 @@ export const POSTS = [
         caption: 'Train har brethens',
         profile_picture: USERS[0].image,
         comments: [
-           
+            {
+                user: 'amadadev.',
+                comment: 'lorem how matt',
+            },{
+                user: 'Hamza Umar',
+                comment: ' mad over you '
+            },
         ],
     },
     {
