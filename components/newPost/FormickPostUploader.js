@@ -1,8 +1,10 @@
+import { NavigationContainer } from '@react-navigation/native'
 import { Formik } from 'formik'
 import React, { useState } from 'react'
 import { View, Text, Image, TextInput, Button } from 'react-native'
 import { Divider } from 'react-native-elements'
 import * as  Yup from 'yup'
+import validUrl from 'valid-url'
 
 const PLACEHOLDER_IMG = 'https://gadgetsghana.com/assets/images/logo.png'
 
@@ -11,20 +13,23 @@ const uploadPostSchema = Yup.object().shape({
     caption: Yup.string().max(2200, 'Caption has reached the character limit'),
 })
 
-const FormickPostUploader = () => {
+const FormickPostUploader = ({ navigation }) => {
     const [thumbnailUrl, setThumbnailUrl] = useState(PLACEHOLDER_IMG)
 
     return (
        <Formik 
             initialValues={{caption: '', imageUrl: ''}}
-            onSubmit={(values) => console.log(values)}
+            onSubmit={(values) => {
+                console.log(values)
+                navigation.goBack()
+            }}
             validationSchema={uploadPostSchema}
             validateonMount={true}
        >
            {({ handleBlur, handleChange, handleSubmit, values, errors, isValid}) => (
                <>
                 <View style={{ margin: 20, justifyContent: 'space-between', flexDirection: 'row'}}>
-                    <Image source={{ uri: thumbnailUrl ? thumbnailUrl : PLACEHOLDER_IMG}} style={{ width: 100, height: 100}}/>
+                    <Image source={{ uri: validUrl.isUri(thumbnailUrl) ? thumbnailUrl : PLACEHOLDER_IMG}} style={{ width: 100, height: 100}}/>
                     <View style={{flex: 1, marginLeft: 12}}>
                     <TextInput 
                         style={{color:'#fff', fontSize: 20 }}
