@@ -69,7 +69,7 @@ const PostHeader = ({ post }) => (
     <View style={styles.postHeader}>
         <View style={styles.postHeaderLeft}>
             <Image source={{ uri: post.profile_picture }} style={styles.story} />
-            <Text style={styles.postHeaderText}>{post.user}</Text>
+            <Text style={styles.postHeaderText}>{post.username}</Text>
         </View>
         <Text style={styles.postHeaderRight}>...</Text>
     </View>
