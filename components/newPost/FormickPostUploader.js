@@ -40,19 +40,18 @@ const FormickPostUploader = ({ navigation }) => {
     }, [])
 
     const uplaodpostToFirebase = (caption, imageUrl) => {
-        console.log(currentloggedInUser.username)
         const unsubscribe = db
             .collection('users')
             .doc(firebase.auth().currentUser.email)
             .collection('posts')
             .add({
                 imageUrl: imageUrl,
-                user: currentloggedInUser.username,
+                username: currentloggedInUser.username,
                 profile_picture: currentloggedInUser.profilePicture,
                 owner_uid: firebase.auth().currentUser.uid,
+                owner_email: firebase.auth().currentUser.email,
                 caption: caption,
                 createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-                likes: 0,
                 likes_by_users: [],
                 comments: [],
             })
