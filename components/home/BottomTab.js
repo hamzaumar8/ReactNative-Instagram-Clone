@@ -40,8 +40,8 @@ const BottomTab = ({ icons }) => {
                 source={{ uri: activeTab === icon.name ? icon.active : icon.inactive }} 
                 style={[
                     styles.icon, 
-                    icon.name === 'Profile' ? styles.profilePic() : null, 
-                    activeTab === 'Profile' && icon.name === activeTab ? styles.profilePic(activeTab) : null, 
+                    icon.name === 'Profile' ? styles.profilePic : null, 
+                    {borderWidth: activeTab === 'Profile' && icon.name === activeTab ? 2 : 0}, 
                 ]}
             />
         </TouchableOpacity>
@@ -77,11 +77,10 @@ const styles = StyleSheet.create({
         width:30,
         height: 30,
     },
-    profilePic: (activeTab = '') => ({
+    profilePic: {
         borderRadius: 50,
-        borderWidth: activeTab === 'Profile' ? 2 : 0,
         borderColor: '#fff'
-    })
+    }
 })
 
 export default BottomTab
